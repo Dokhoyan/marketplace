@@ -1,0 +1,42 @@
+version: "2"
+
+run:
+  timeout: 5m
+  tests: false
+
+linters:
+  default: none
+  enable:
+    - errcheck
+    - govet
+    - ineffassign
+    - unused
+    - staticcheck
+    - gosec
+    - revive
+    - errname
+    - misspell
+    - unconvert
+    - gocyclo
+  settings:
+    gocyclo:
+      min-complexity: 25
+    revive:
+      rules:
+        - name: exported
+          disabled: true
+        - name: package-comments
+          disabled: true
+  exclusions:
+    paths:
+      - internal/repository/mocks
+      - internal/service/mocks
+    rules:
+      - linters: [gosec]
+        text: "G104|G112"
+      - linters: [revive]
+        text: "unexported-return|var-naming:.*package name"
+
+formatters:
+  enable:
+    - goimports

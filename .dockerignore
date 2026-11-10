@@ -1,0 +1,7 @@
+.git
+.idea
+.env
+bin
+logs
+cover.out
+README.md
